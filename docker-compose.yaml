@@ -1,0 +1,9 @@
+services:
+  postgre:
+    image: postgres
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=video-gallery
+    ports:
+      - 5432:5432

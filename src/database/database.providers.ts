@@ -1,7 +1,9 @@
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { createConnection } from 'typeorm';
-
-export const PostgreSQLConnectionKey = Symbol('PostgreSQLConnectionKey');
+import { PostgreSQLConnectionKey } from '../contants';
+import { User } from '../user/user.entity';
+import { Share } from '../share-link/share.entity';
+import { Video } from '../video/video.entity';
 
 export const databaseProviders = [
   {
@@ -14,7 +16,9 @@ export const databaseProviders = [
         username: configService.get('POSTGRE_USERNAME'),
         password: configService.get('POSTGRE_PASSWORD'),
         database: configService.get('POSTGRE_DATABASE'),
-        entities: [],
+        entities: [User, Video, Share],
+        synchronize: true,
+        logging: true,
       });
     },
     inject: [ConfigService],

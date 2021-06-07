@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
+import { UserProxyModule } from './user.proxy-module';
 import { UserController } from './user.controller';
-import { DatabaseModule } from '../database/database.module';
-import { userProviders } from './user.providers';
 import { UserService } from './user.service';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [UserProxyModule.forRoot()],
   controllers: [UserController],
-  providers: [...userProviders, UserService],
+  providers: [UserService],
 })
 export class UserModule {}
